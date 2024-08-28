@@ -5,6 +5,11 @@ resource "aws_instance" "my-ec2" {
   instance_type = "t2.micro"
 
   tags = {
-    Name = each.key
+    Name        = each.key
+    environment = "Production"
+    Project     = "Dev"
+    Role        = each.key == "instance-1" ? "Web" : each.key == "instance-2" ? "Database" : "admin"
+
+
   }
 }
